@@ -1,0 +1,93 @@
+<div class="wrapper">
+    <div class="content !max-w-3xl !h-auto !p-8">
+        <a href="#" class="app-title">
+            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+            Sample App
+        </a>
+
+        <div class="form-container !max-w-3xl">
+            <div class="form-content">
+                <h1 class="form-title">
+                    Register new account
+                </h1>
+
+                <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <mat-form-field class="col-span-2">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" matInput formControlName="first_name">
+                            <mat-error
+                                *ngIf="formControl.controls['first_name'].errors && formControl.controls['first_name'].errors['required']">
+                                First Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" matInput formControlName="last_name">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput formControlName="email">
+                            <mat-error
+                                *ngIf="formControl.controls['email'].errors && formControl.controls['email'].errors['email'] && !formControl.controls['email'].errors['required']">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error
+                                *ngIf="formControl.controls['email'].errors && formControl.controls['email'].errors['required']">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput formControlName="password">
+                            <mat-error
+                                *ngIf="formControl.controls['password'].errors && formControl.controls['password'].errors['required']">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2">
+                            <mat-label>Sex</mat-label>
+                            <select matNativeControl formControlName="sex">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <mat-error
+                                *ngIf="formControl.controls['sex'].errors && formControl.controls['sex'].errors['required']">
+                                Sex is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="date_of_birth">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error
+                                *ngIf="formControl.controls['date_of_birth'].errors && formControl.controls['date_of_birth'].errors['required']">Date of Birth is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-span-2 md:col-span-4">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput formControlName="address"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <button type="submit" mat-stroked-button [disabled]="disableSubmitButton">Register <mat-spinner
+                            *ngIf="disableSubmitButton"></mat-spinner></button>
+
+                    <p>
+                        Back to
+                        <a routerLink="/login">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

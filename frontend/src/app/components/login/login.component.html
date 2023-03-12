@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <div class="content">
+        <a href="#" class="app-title">
+            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+            Sample App
+        </a>
+
+        <div class="form-container">
+            <div class="form-content">
+                <h1 class="form-title">
+                    Sign in to your account
+                </h1>
+
+                <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput formControlName="email" placeholder="Your Email Address">
+                        <mat-error
+                            *ngIf="formControl.controls['email'].errors && formControl.controls['email'].errors['email'] && !formControl.controls['email'].errors['required']">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error
+                            *ngIf="formControl.controls['email'].errors && formControl.controls['email'].errors['required']">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password" placeholder="Your Account Password">
+                        <mat-error
+                            *ngIf="formControl.controls['password'].errors && formControl.controls['password'].errors['required']">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button type="submit" mat-stroked-button [disabled]="disableSubmitButton">Sign in <mat-spinner *ngIf="disableSubmitButton"></mat-spinner></button>
+
+                    <p>
+                        Don’t have an account yet?
+                        <a routerLink="/register">Sign up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
