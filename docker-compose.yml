@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DBNAME
+    ports:
+      - $MYSQL_PORT:$MYSQL_PORT
+    volumes:
+      - db:/var/lib/mysql
+
+  redis_cache:
+    image: redis:6.2-alpine
+    restart: always
+    env_file: .env
+    ports:
+      - $REDIS_PORT:$REDIS_PORT
+    command: redis-server --save
+    volumes:
+      - cache:/data
+
+  backend_app:
+    depends_on:
+      - mysqldb
+      - redis_cache
+    build: ./backend
+    env_file: .env
+    ports:
+      - $PORT:$PORT
+    stdin_open: true
+    tty: true
+
+  frontend_app:
+    build: ./frontend
+    ports:
+      - $FRONT_END_PORT:$FRONT_END_PORT
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:
+  cache:
