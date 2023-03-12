@@ -1,4 +1,6 @@
-# Sample Full Stack App for managing users. This app is built using following stacks:
+# Sample Full Stack App for managing users. 
+
+This app is built using following stacks:
 
 1. NodeJS Backend with Fastify
 2. Angular Frontend with Angular Material + Tailwind
